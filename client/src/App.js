@@ -50,11 +50,11 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Header from "./components/Header"; // ✅ Import Header Component
+import Header from "./components/Header"; 
 
 // ✅ Protected Route - Redirects if not authenticated
 function ProtectedRoute() {
-  const isAuthenticated = localStorage.getItem("user"); // ✅ Check if user is logged in
+  const isAuthenticated = localStorage.getItem("user");
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 }
 
@@ -63,7 +63,6 @@ const Layout = ({ children }) => {
   const location = useLocation();
   return (
     <>
-      {/* ✅ Show Header on all pages EXCEPT login */}
       {location.pathname !== "/login" && <Header />}
       {children}
     </>
@@ -75,19 +74,19 @@ function App() {
     <Router>
       <Layout>
         <Routes>
-          {/* ✅ Redirect root path based on authentication */}
-          <Route path="/" element={localStorage.getItem("user") ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+          {/* ✅ Fix: Prevent infinite redirect */}
+          <Route path="/" element={<Navigate to={localStorage.getItem("user") ? "/dashboard" : "/login"} />} />
           
           {/* Public Route */}
           <Route path="/login" element={<Login />} />
           
-          {/* ✅ Protected Routes (Dashboard should show header) */}
+          {/* ✅ Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
 
-          {/* ✅ Handle unknown routes */}
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* ✅ Fix: Redirect all unknown routes to dashboard */}
+          <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
       </Layout>
     </Router>

@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("../models/USer");
+const User = require("../models/User");  // ✅ Correct case-sensitive import
 
 const router = express.Router();
 

@@ -1,20 +1,18 @@
-
-// // export default App;
 // import React from "react";
 // import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 // import Login from "./pages/Login";
 // import Dashboard from "./pages/Dashboard";
 // import Header from "./components/Header"; // ✅ Import Header Component
 
+// // ✅ Protected Route - Redirects if not authenticated
 // function ProtectedRoute() {
 //   const isAuthenticated = localStorage.getItem("user"); // ✅ Check if user is logged in
 //   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 // }
 
-// // ✅ New Layout Wrapper to Hide Header on Login Page
+// // ✅ Layout Wrapper - Hides Header on Login Page
 // const Layout = ({ children }) => {
 //   const location = useLocation(); // ✅ Get current route
-
 //   return (
 //     <>
 //       {location.pathname !== "/login" && <Header />} {/* ✅ Hide Header on Login */}
@@ -28,7 +26,10 @@
 //     <Router>
 //       <Layout>
 //         <Routes>
-//           {/* Public Routes */}
+//           {/* ✅ Redirect root path based on authentication */}
+//           <Route path="/" element={localStorage.getItem("user") ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+          
+//           {/* Public Route */}
 //           <Route path="/login" element={<Login />} />
           
 //           {/* Protected Routes */}
@@ -37,7 +38,7 @@
 //           </Route>
 
 //           {/* 404 Page */}
-//           <Route path="/dashboard" element={<h1>404 - Page Not Found</h1>} />
+//           <Route path="*" element={<h1>404 - Page Not Found</h1>} />
 //         </Routes>
 //       </Layout>
 //     </Router>
@@ -57,12 +58,13 @@ function ProtectedRoute() {
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 }
 
-// ✅ Layout Wrapper - Hides Header on Login Page
+// ✅ Layout Wrapper - Show Header on Dashboard
 const Layout = ({ children }) => {
-  const location = useLocation(); // ✅ Get current route
+  const location = useLocation();
   return (
     <>
-      {location.pathname !== "/login" && <Header />} {/* ✅ Hide Header on Login */}
+      {/* ✅ Show Header on all pages EXCEPT login */}
+      {location.pathname !== "/login" && <Header />}
       {children}
     </>
   );
@@ -79,13 +81,13 @@ function App() {
           {/* Public Route */}
           <Route path="/login" element={<Login />} />
           
-          {/* Protected Routes */}
+          {/* ✅ Protected Routes (Dashboard should show header) */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
 
-          {/* 404 Page */}
-          <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+          {/* ✅ Handle unknown routes */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Layout>
     </Router>

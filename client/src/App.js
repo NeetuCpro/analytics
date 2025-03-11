@@ -75,7 +75,6 @@ function App() {
       <Layout>
         <Routes>
           {/* ✅ Fix: Prevent infinite redirect */}
-          <Route path="/" element={<Navigate to={localStorage.getItem("user") ? "/dashboard" : "/login"} />} />
           
           {/* Public Route */}
           <Route path="/login" element={<Login />} />
@@ -84,9 +83,6 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
-
-          {/* ✅ Fix: Redirect all unknown routes to dashboard */}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
       </Layout>
     </Router>

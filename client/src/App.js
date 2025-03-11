@@ -33,21 +33,21 @@ function App() {
     <Router>
       <Layout>
         <Routes>
-        
-          {/* Public Route */}
+
           <Route path="/login" element={<Login />} />
           
           {/* ✅ Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
+
           <Route path="/woocommerce" element={<WooCommerce />} />
         <Route path="/social" element={<Social />} />
         <Route path="/visitoranalytics" element={<VisitorAnalytics />} />
         <Route path="/searchconsole" element={<SearchConsole />} />
         <Route path="/woocommerce-analytics" element={<WooCommerceAnalytics />} />
         <Route path="/report" element={<Report />} />
-         
+
         </Routes>
       </Layout>
     </Router>

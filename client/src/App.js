@@ -1,9 +1,9 @@
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Header from "./components/Header"; 
+import Header from "./components/Header";
+import Footer from "./components/Footer"; // ✅ Import Footer
 import WooCommerce from './pages/WooCommerce';
 import Social from './pages/Social';
 import VisitorAnalytics from './pages/VisitorAnalytics';
@@ -17,14 +17,15 @@ function ProtectedRoute() {
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 }
 
-// ✅ Layout Wrapper - Show Header on Dashboard
+// ✅ Layout Wrapper - Show Header on Dashboard and Footer on all pages
 const Layout = ({ children }) => {
   const location = useLocation();
   return (
-    <>
+    <div className="app-container">
       {location.pathname !== "/login" && <Header />}
-      {children}
-    </>
+      <div className="content-wrapper">{children}</div>
+      <Footer /> {/* ✅ Footer appears on all pages */}
+    </div>
   );
 };
 
@@ -33,21 +34,19 @@ function App() {
     <Router>
       <Layout>
         <Routes>
-
           <Route path="/login" element={<Login />} />
-          
+
           {/* ✅ Protected Routes */}
-          <Route element={<ProtectedRoute />}>
+          <Route >
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
 
           <Route path="/woocommerce" element={<WooCommerce />} />
-        <Route path="/social" element={<Social />} />
-        <Route path="/visitoranalytics" element={<VisitorAnalytics />} />
-        <Route path="/searchconsole" element={<SearchConsole />} />
-        <Route path="/woocommerce-analytics" element={<WooCommerceAnalytics />} />
-        <Route path="/report" element={<Report />} />
-
+          <Route path="/social" element={<Social />} />
+          <Route path="/visitoranalytics" element={<VisitorAnalytics />} />
+          <Route path="/searchconsole" element={<SearchConsole />} />
+          <Route path="/woocommerce-analytics" element={<WooCommerceAnalytics />} />
+          <Route path="/report" element={<Report />} />
         </Routes>
       </Layout>
     </Router>

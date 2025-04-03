@@ -54,9 +54,9 @@
   
   /* Login Button */
   button {
-    width: 100%;
+    /* width: 34%; */
     padding: 12px;
-    background: #8b0000;
+    background: #0c3596;
     color: white;
     border: none;
     border-radius: 5px;
@@ -66,7 +66,7 @@
   }
   
   button:hover {
-    background: #600000;
+    background: #0c3596;
   }
   
   /* Error Message */

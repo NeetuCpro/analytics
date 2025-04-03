@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
     "server": "nodemon server.js",
     "client": "cd client && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "backend:dev": "NODE_ENV=development nodemon server.js",
-    "backend:prod": "NODE_ENV=production node server.js"
+    "backend:dev": "cross-env NODE_ENV=development nodemon server.js",
+    "backend:prod": "cross-env NODE_ENV=production node server.js"
   },
   "keywords": [],
   "author": "",
@@ -23,5 +23,8 @@
     "mongoose": "^8.11.0",
     "nodemon": "^3.1.9",
     "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

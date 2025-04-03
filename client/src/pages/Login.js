@@ -13,7 +13,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     const response = await loginUser(email, password);
-
+    console.log("Login Response:", response); // Debugging
+  
     if (response.error) {
       setError(response.error);
     } else {
@@ -21,6 +22,7 @@ const Login = () => {
       navigate("/dashboard");
     }
   };
+  
 
   return (
     <div className="login-container">

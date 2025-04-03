@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useLocation }
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
-import Footer from "./components/Footer"; // ✅ Import Footer
+import Footer from "./components/Footer"; 
 import WooCommerce from './pages/WooCommerce';
 import Social from './pages/Social';
 import VisitorAnalytics from './pages/VisitorAnalytics';
@@ -34,19 +34,22 @@ function App() {
     <Router>
       <Layout>
         <Routes>
+          {/* ✅ This ensures "/" redirects to "/login" */}
+          <Route path="/" element={<Navigate to="/login" replace />} />
+
+          {/* ✅ Login Page Route */}
           <Route path="/login" element={<Login />} />
 
           {/* ✅ Protected Routes */}
-          <Route >
+          <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/woocommerce" element={<WooCommerce />} />
+            <Route path="/social" element={<Social />} />
+            <Route path="/visitoranalytics" element={<VisitorAnalytics />} />
+            <Route path="/searchconsole" element={<SearchConsole />} />
+            <Route path="/woocommerce-analytics" element={<WooCommerceAnalytics />} />
+            <Route path="/report" element={<Report />} />
           </Route>
-
-          <Route path="/woocommerce" element={<WooCommerce />} />
-          <Route path="/social" element={<Social />} />
-          <Route path="/visitoranalytics" element={<VisitorAnalytics />} />
-          <Route path="/searchconsole" element={<SearchConsole />} />
-          <Route path="/woocommerce-analytics" element={<WooCommerceAnalytics />} />
-          <Route path="/report" element={<Report />} />
         </Routes>
       </Layout>
     </Router>

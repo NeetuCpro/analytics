@@ -35,13 +35,19 @@ const Header = () => {
           { value: "WooCommerce Analytics", url: "/woocommerce-analytics" },
         ],
       },
-      
     ],
   });
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser);
+    try {
+      const userData = localStorage.getItem("user");
+      if (userData) {
+        const storedUser = JSON.parse(userData);
+        setUser(storedUser);
+      }
+    } catch (error) {
+      console.error("Error reading user from localStorage:", error);
+    }
   }, []);
 
   const toggleMenu = (menu) => {
@@ -59,21 +65,22 @@ const Header = () => {
 
   return (
     <header className="header">
-       <div className="logo">
-       <img src="/Progility.png" alt="Logo" />
-       {/* <p className="logo-paragraph">Driven by insights</p> */}
-
+      <div className="logo">
+        <img src="/Progility.png" alt="Logo" />
       </div>
+
       <nav className="nav-menu">
         <ul>
           {menuItems.main.map((menu, index) => (
-            <li 
+            <li
               className="dropdown"
               key={index}
               onMouseEnter={() => setOpenMenu(menu.category)}
               onMouseLeave={() => setOpenMenu(null)}
             >
-              <button>{menu.category} {menu.options && menu.options.length > 0 && "▼"}</button>
+              <button>
+                {menu.category} {menu.options && menu.options.length > 0 && "▼"}
+              </button>
               {openMenu === menu.category && menu.options && menu.options.length > 0 && (
                 <ul className="submenu">
                   {menu.options.map((item, idx) => (
@@ -92,7 +99,7 @@ const Header = () => {
         {user && (
           <div className="profile-menu">
             <button onClick={toggleDropdown} className="profile-icon">
-              {user.username.charAt(0).toUpperCase()}
+              {user.username ? user.username.charAt(0).toUpperCase() : "U"}
               <span className="online-indicator"></span>
             </button>
             {dropdownOpen && (

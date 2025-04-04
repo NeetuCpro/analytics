@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node server.js",
     "server": "nodemon server.js",
     "client": "cd client && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -23,8 +23,5 @@
     "mongoose": "^8.11.0",
     "nodemon": "^3.1.9",
     "react-scripts": "^5.0.1"
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3"
   }
 }

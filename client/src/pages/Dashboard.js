@@ -1,32 +1,3 @@
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import "../styles/Dashboard.css";
-
-// const Dashboard = () => {
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className="dashboard-container">
-//       <div className="hero-container">
-//         <div className="hero-content">
-//           <h1>DRIVEN BY INSIGHTS</h1>
-//           <p>
-//             ELEVATE YOUR BUSINESS WITH TAILORED B2B <br /> CONSULTANCY SOLUTIONS
-//           </p>
-//           <button
-//             className="hero-button"
-//             onClick={() => navigate("/solutions")} >
-//             Explore Our Solutions
-//           </button>
-//         </div>       
-//       </div>
-      
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Dashboard.css";

@@ -13,15 +13,18 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     const response = await loginUser(email, password);
-    console.log("Login Response:", response); // Debugging
+    console.log("Login Response:", response);
   
-    if (response.error) {
-      setError(response.error);
-    } else {
+    if (!response || response.error) {
+      setError(response?.error || "Something went wrong. Please try again.");
+    } else if (response.user) {
       localStorage.setItem("user", JSON.stringify(response.user));
       navigate("/dashboard");
+    } else {
+      setError("Login failed. User data not received.");
     }
   };
+  
   
 
   return (

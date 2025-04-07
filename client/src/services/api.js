@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 // Auto-detect the environment
@@ -12,7 +11,7 @@ const API = axios.create({ baseURL: BASE_URL });
 // Fetch users
 export const fetchUsers = async () => {
   try {
-    const response = await API.get("/users");
+    const response = await API.get("/users"); // 👉 calls /api/users
     return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
     return [];
@@ -22,7 +21,7 @@ export const fetchUsers = async () => {
 // Login API
 export const loginUser = async (email, password) => {
   try {
-    const response = await API.post("/users/login", { email, password });
+    const response = await API.post("/users/login", { email, password }); // 👉 calls /api/users/login
     return response.data;
   } catch (error) {
     return { error: error.response?.data?.message || "Login failed" };
